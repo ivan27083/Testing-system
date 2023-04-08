@@ -1,0 +1,11 @@
+#pragma once
+void prepod_login();
+void prepod_menu();
+void del_question();
+void add_question();
+void change_question();
+void delreg_students();
+void change_students_progress();
+void students_list();
+void filter();
+void sort();
