@@ -136,6 +136,10 @@
     <ClInclude Include="prepod.h" />
     <ClInclude Include="student.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="admin_data.bin" />
+    <Text Include="data.bin" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

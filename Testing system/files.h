@@ -2,11 +2,11 @@
 struct student {
 	string login;
 	string password;
-	double marks[8];
+	int marks[8];
 	int exam_mark;
 	double sr_mark;
 };
-struct test {
+struct quest {
 	string question;
 	string answers[4];
 };
