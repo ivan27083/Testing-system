@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="files.cpp" />
     <ClCompile Include="Main menu.cpp" />
     <ClCompile Include="student.cpp" />
   </ItemGroup>
