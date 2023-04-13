@@ -1,4 +1,7 @@
 #pragma once
+#include <fstream>
+#include <iostream>
+using namespace std;
 struct student {
 	string login;
 	string password;
@@ -10,5 +13,7 @@ struct quest {
 	string question;
 	string answers[4];
 };
-void code();
-void open_code();
+void code_student(student surname, fstream& f);
+void code_question(quest quest, fstream &f);
+void decode_student(student surname, fstream &f);
+void decode_question(quest quest, fstream& f);

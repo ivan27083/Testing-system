@@ -1,7 +1,8 @@
 #include "student.h"
 #include <iostream>
 using namespace std;
-void menu(){
+
+void menu() {
     string login, password;
     int k;
     cout << "Введите сначала логин, потом пароль " << endl;
@@ -27,7 +28,7 @@ void menu(){
     } while (k < 0 || k>3);
 }
 
-void training_test() {
+/*void training_test() {
     cout << "Выберите тему: 1 - циклы, массивы"<<endl;
     
-}
+}*/

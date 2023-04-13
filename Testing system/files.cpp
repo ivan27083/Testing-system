@@ -36,52 +36,123 @@ int hexToDec(string hex) {
 	return dec;
 }
 
-
-void code_student(student surname) {
+void code_student(student surname, fstream& f) {
 	string login="", password="", marks="";
-	ofstream f("data.txt");
 	for (int i = 0; i < surname.login.length(); i++) {
 		login += inttohex(int(surname.login[i])) + ".";
 	}
 	f << login;
+	f << "\n";
 	for (int i = 0; i < surname.password.length(); i++) {
-		login += inttohex(int(surname.password[i])) + ".";
+		password += inttohex(int(surname.password[i])) + ".";
 	}
 	f << password;
+	f << "\n";
+	char a;
 	for (int i = 0; i < 8; i++) {
-		marks += inttohex(surname.marks[i]) + ".";
+		marks += inttohex(surname.marks[i]+48) + ".";
 	}
 	f << marks;
-	string ex_mark = inttohex(surname.exam_mark);
+	f << "\n";
+	string ex_mark = inttohex(surname.exam_mark + 48) + ".";
 	f << ex_mark;
-	string sr_mark = inttohex(surname.sr_mark);
-	f << sr_mark;
+	f << "\n";
 	f.close();
 }
 
-void code_question(quest quest, fstream f) {
+void code_question(quest quest, fstream& f) {
 	string ans="";
-	f << quest.question;
+	for (int i = 0; i < quest.question.length(); i++) {
+		ans += inttohex(int(quest.question[i])) + ".";
+	}
+	f << ans;
 	for (int i = 0; i < 4; i++) {
-		ans += quest.answers[i];
+		ans = "";
+		for (int j = 0; j < quest.answers[i].length(); i++) {
+			ans += inttohex(int(quest.answers[i][j])) + ".";
+		}
 	}
 	f << ans;
 	f.close();
 }
 
-void decode_student(student surname) {
-	ifstream f("data.txt");
+void decode_student(student surname, fstream& f) {
 	string a="", b = "";
 	f >> a;
 	int i = 0;
-	while (a != ""){
+	while (i != a.length()) {
 		if (a[i] == '.') {
-			surname.login += string(hexToDec(b),sizeof(string));
+			surname.login += char(hexToDec(b));
+			b = "";
+			i++;
+		}
+		else {
+			b += a[i];
+			i++;
+		}
+	}
+	a = "", b = "";
+	f >> a;
+	i = 0;
+	while (i != a.length()) {
+		if (a[i] == '.') {
+			surname.password += char(hexToDec(b));
+			b = "";
+			i++;
+		}
+		else {
+			b += a[i];
+			i++;
+		}
+	}
+	a = "", b = "";
+	f >> a;
+	i = 0;
+	int j = 0;
+	while (i != a.length()) {
+		if (a[i] == '.') {
+			surname.marks[j++] = int(char(hexToDec(b)));
+			b = "";
+			i++;
+		}
+		else {
+			b += a[i];
+			i++;
+		}
+	}
+	a = "";
+	f >> a;
+	surname.exam_mark = int(char(hexToDec(a)));
+	f.close();
+}
+void decode_question(quest quest, fstream& f) {
+	string a = "", b = "";
+	int i = 0;
+	f >> a;
+	while (a != "") {
+		if (a[i] == '.') {
+			quest.question += string(hexToDec(b), sizeof(string));
 			b = "";
 		}
-		b += a[i];
-		i++;
+		else {
+			b += a[i];
+			i++;
+		}
 	}
-
+	for (int j = 0; j < 4; i++) {
+		a = "";
+		i = 0;
+		f >> a;
+		while (a != "") {
+			if (a[i] == '.') {
+				quest.question += string(hexToDec(b), sizeof(string));
+				b = "";
+			}
+			else {
+				b += a[i];
+				i++;
+			}
+		}
+	}
 	f.close();
 }

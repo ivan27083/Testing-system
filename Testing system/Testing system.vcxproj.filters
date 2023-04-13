@@ -24,6 +24,9 @@
     <ClCompile Include="files.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="student.h">
@@ -39,5 +42,8 @@
   <ItemGroup>
     <Text Include="data.bin" />
     <Text Include="admin_data.bin" />
+    <Text Include="test.txt" />
+    <Text Include="res.txt" />
+    <Text Include="res2.txt" />
   </ItemGroup>
 </Project>

@@ -130,6 +130,7 @@
     <ClCompile Include="files.cpp" />
     <ClCompile Include="Main menu.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
@@ -139,6 +140,9 @@
   <ItemGroup>
     <Text Include="admin_data.bin" />
     <Text Include="data.bin" />
+    <Text Include="res.txt" />
+    <Text Include="res2.txt" />
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
