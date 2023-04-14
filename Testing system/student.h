@@ -8,7 +8,7 @@ struct student;
 void choice(student st);
 void tema_trening(student st);
 void tema_test(student st);
-void finish_test();
+void finish_test(student st);
 void menu();
 void test(std::string name, student st);
 void train(std::string name, student st);
