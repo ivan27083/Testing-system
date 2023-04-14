@@ -57,23 +57,23 @@ void code_student(student surname, fstream& f) {
 	string ex_mark = inttohex(surname.exam_mark + 48) + ".";
 	f << ex_mark;
 	f << "\n";
-	f.close();
 }
 
 void code_question(quest quest, fstream& f) {
 	string ans="";
 	for (int i = 0; i < quest.question.length(); i++) {
-		ans += inttohex(int(quest.question[i])) + ".";
+		ans += inttohex(int(unsigned char(quest.question[i]))) + ".";
 	}
 	f << ans;
+	f << "\n";
 	for (int i = 0; i < 4; i++) {
 		ans = "";
-		for (int j = 0; j < quest.answers[i].length(); i++) {
-			ans += inttohex(int(quest.answers[i][j])) + ".";
+		for (int j = 0; j < quest.answers[i].length(); j++) {
+			ans += inttohex(int(unsigned char(quest.answers[i][j]))) + ".";
 		}
+		f << ans;
+		f << "\n";
 	}
-	f << ans;
-	f.close();
 }
 
 void decode_student(student surname, fstream& f) {
@@ -123,30 +123,33 @@ void decode_student(student surname, fstream& f) {
 	a = "";
 	f >> a;
 	surname.exam_mark = int(char(hexToDec(a)));
-	f.close();
 }
 void decode_question(quest quest, fstream& f) {
 	string a = "", b = "";
 	int i = 0;
-	f >> a;
-	while (a != "") {
+	getline(f, a);
+	quest.question = "";
+	while (i != a.length()) {
 		if (a[i] == '.') {
-			quest.question += string(hexToDec(b), sizeof(string));
+			quest.question += char(hexToDec(b));
 			b = "";
+			i++;
 		}
 		else {
 			b += a[i];
 			i++;
 		}
 	}
-	for (int j = 0; j < 4; i++) {
+	for (int j = 0; j < 4; j++) {
+		quest.answers[j] = "";
 		a = "";
 		i = 0;
-		f >> a;
-		while (a != "") {
+		getline(f, a);
+		while (i != a.length()) {
 			if (a[i] == '.') {
-				quest.question += string(hexToDec(b), sizeof(string));
+				quest.answers[j] += char(hexToDec(b));
 				b = "";
+				i++;
 			}
 			else {
 				b += a[i];
@@ -154,5 +157,4 @@ void decode_question(quest quest, fstream& f) {
 			}
 		}
 	}
-	f.close();
 }

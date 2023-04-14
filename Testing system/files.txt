@@ -1,0 +1,179 @@
+№1 Как создать файл в С++?
+1)createFile();
+2)newFile();
+3)openFile();
+4)ofstream();*
+
+№2 Как прочитать данные из файла в С++?
+1)ifstream();*
+2)readData();
+3)readFromFile();
+4)getFromStream();
+
+№3 Как записать данные в файл в С++?
+1)appendData();
+2)writeToStream();
+3)ofstream();*
+4)writeFile();
+
+№4 Как проверить, существует ли файл в С++?
+1)existsFile();
+2)ifstream();*
+3)openFile();
+4)readFromFile();
+
+№5 Как удалить файл в С++?
+1)deleteFile();
+2)removeFile();
+3)clearFile();
+4)remove();*
+
+№6 Как получить размер файла в С++?
+1)ifstream();*
+2)getSize();
+3)getLength();
+4)lengthOfFile();
+
+№7 Как переместить указатель чтения/записи в файле в С++?
+1)movePointer();
+2)shiftPointer();
+3)seekg()/seekp();*
+4)changePointer();
+
+№8 Как закрыть файл в С++?
+1)closeFile();
+2)finishFile();
+3)endFile();
+4)close();*
+
+№9 Как проверить, достигнут ли конец файла в С++?
+1)endOfFile();
+2)ifstream();*
+3)checkEOF();
+4)isEOF();
+
+№10 Как открыть файл для чтения и записи в С++?
+1)openRead();
+2)openWrite();
+3)fstream();*
+4)openReadWrite();
+
+№11 Как записать данные в файл в определенную позицию в С++?
+1)writeData();
+2)appendData();
+3)seekp() и write();*
+4)shiftPointer() и write();
+
+№12 Как прочитать строку из файла в С++?
+1)getLine();
+2)readLine();
+3)getline();*
+4)fetchLine();
+
+№13 Как прочитать один символ из файла в С++?
+1)getChar();
+2)ifstream().get();*
+3)readChar();
+4)fetchChar();
+
+№14 Как прочитать числовые данные из файла в С++?
+1)readData();
+2)operator>>();*
+3)getNumber();
+4)fetchNumber();
+
+№15 Как прочитать бинарные данные из файла в С++?
+1)ifstream().read();*
+2)readBinary();
+3)getBinary();
+4)fetchBinary();
+
+№16 Как записать бинарные данные в файл в С++?
+1)ofstream().write();*
+2)writeBinary();
+3)putBinary();
+4)insertBinary();
+
+№17 Как записать строку в файл в С++?
+1)putString();
+2)writeString();
+3)ofstream().write();*
+4)insertString();
+
+№18 Как прочитать данные в определенном формате из файла в С++?
+1)formatRead();
+2)operator>>();*
+3)readFormatted();
+4)fetchFormatted();
+
+№19 Как записать данные в определенном формате в файл в С++?
+1)operator<<();*
+2)formatWrite();
+3)writeFormatted();
+4)insertFormatted();
+
+№20 Как создать копию файла в С++?
+1)copyFile();
+2)duplicateFile();
+3)ifstream() и ofstream();*
+4)replicate();
+
+№21 Как переименовать файл в С++?
+1)renameFile();
+2)changeFileName();
+3)rename();*
+4)moveFile();
+
+№22 Как проверить, открыт ли файл в С++?
+1)is_open();*
+2)isOpen();
+3)checkOpen();
+4)hasOpened();
+
+№23 Как изменить права доступа к файлу в С++?
+1)changeFilePermissions();
+2)setFilePermissions();
+3)chmod();*
+4)accessFile();
+
+№24 Как прочитать файл по блокам в С++?
+1)readBlocks();
+2)ifstream().read();*
+3)fetchBlocks();
+4)getBlocks();
+
+№25 Как записать данные в файл по блокам в С++?
+1)putBlocks();
+2)writeBlocks();
+3)ofstream().write();*
+4)insertBlocks();
+
+№26 Как прочитать содержимое файла в строку в С++?
+1)getStringFromFile();
+2)readToString();
+3)stringstream();*
+4)fetchString();
+
+№27 Как прочитать содержимое файла в вектор байтов в С++?
+1)getBytesFromFile();
+2)readToBytes();
+3)ifstream().read();*
+4)fetchBytes();
+
+№28 Как записать вектор байтов в файл в С++?
+1)putBytesToFile();
+2)writeBytes();
+3)ofstream().write();*
+4)insertBytes();
+
+№29 Как проверить, является ли файл директорией в С++?
+1)isDirectory();
+2)is_directory();*
+3)checkDirectory();
+4)hasDirectory();
+
+№30 Как получить список файлов в директории в С++?
+1)listDirectory();
+2)getDirectoryList();
+3)filesystem::directory_iterator();*
+4)fetchDirectory();

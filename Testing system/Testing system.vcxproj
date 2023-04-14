@@ -130,7 +130,7 @@
     <ClCompile Include="files.cpp" />
     <ClCompile Include="Main menu.cpp" />
     <ClCompile Include="student.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="convertor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
@@ -138,10 +138,22 @@
     <ClInclude Include="student.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="admin_data.bin" />
-    <Text Include="data.bin" />
-    <Text Include="res.txt" />
-    <Text Include="res2.txt" />
+    <Text Include="addresses and pointers.txt" />
+    <Text Include="arrays.txt" />
+    <Text Include="cycles.txt" />
+    <Text Include="dynamic memory.txt" />
+    <Text Include="files.txt" />
+    <Text Include="lines.txt" />
+    <Text Include="recursion.txt" />
+    <Text Include="addresses_and_pointers_hex.txt" />
+    <Text Include="arrays_hex.txt" />
+    <Text Include="cycles_hex.txt" />
+    <Text Include="dynamic_memory_hex.txt" />
+    <Text Include="files_hex.txt" />
+    <Text Include="lines_hex.txt" />
+    <Text Include="recursion_hex.txt" />
+    <Text Include="structure_hex.txt" />
+    <Text Include="structure.txt" />
     <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
