@@ -4,35 +4,54 @@ struct quest {
     string question;
     string answers[4];
 };
-void choice(){
+struct student {
+    string login;
+    string password;
+    int marks[8];
+    int exam_mark;
+    double sr_mark;
+};
+void choice(student st){
     int k;
     cout << "Выберите режим 1-тренинг по теме, 2 - тестирование по теме, 3 - итоговый тест" << endl;
     cin >> k;
     switch(k){
-        case 1: {tema_trening(); break;}
-        case 2: {tema_test(); break;}
+        case 1: {tema_trening(st); break;}
+        case 2: {tema_test(st); break;}
         case 3: {finish_test(); break;}
     }
 }
 void menu(){
+    int l;
+    student arr[100];
+    student st1;
+    st1.login = "АннаКлековкина";
+    st1.password = "12345";
+    arr[0] = st1;
+    student st2;
+    st2.login = "ВаняСемин";
+    st2.password = "12345";
+    arr[1] = st2;
     string login, password;
+    bool flag = true;
     cout << "Введите сначала логин, потом пароль " << endl;
     do{
         cin >> login;
         cin >> password;
-        if (login != "логин")
-            cout << "Доступ запрещен. Введите корректный логин " << endl;
-        if (password != "пароль")
-            cout << "Доступ запрещен. Введите корректный пароль " << endl;
-    }while(login != "логин" || password != "пароль");
-    choice();
+        for (int i = 0; i < 100;i++){
+            if (arr[i].login == login && arr[i].password == password ){
+                flag = false;
+                l = i;
+                choice(arr[l]);
+            }
+        }
+        cout << "Доступ запрещен. Введите корректный логин и пароль" << endl;
+    }while(flag);
 }
 
-void train(string name){
+void train(string name, student st){
     string que, ans1 ,ans2, ans3 ,ans4, t;
     quest wrong_answers[10];
-    int answers[10];
-    int right_answers[10];
     char zv;
     int n, k, answer;
     k = 0;
@@ -113,9 +132,9 @@ void train(string name){
 //            wa++;
 //        }
     }
-    choice();
+    choice(st);
 }
-void test(string name){
+void test(string name, student st){
     string que, ans1 ,ans2, ans3 ,ans4, t;
     quest wrong_answers[10];
     int answers[10];
@@ -123,6 +142,8 @@ void test(string name){
     char zv;
     int n, k, answer;
     k = 0;
+    int len = 0;
+    int mark = 0;
     zv = '*';
     quest St1;
     St1.question = "Вопрос";
@@ -163,11 +184,8 @@ void test(string name){
             count = 0;
             n = rand() % 4;
             for (int h = 0; h < 10 ; h++){
-                //cout << questions_num[h] << endl;
-//                cout << n;
                 if (n == questions_num[h]) count++;}
             }while(count > 0);
-        //n = rand() % 4;
         questions_num[i] = n;
         que = arr[n].question;
         for (int j = 0; j < 4; j++){
@@ -200,11 +218,17 @@ void test(string name){
     }
     
     cout << "количество ошибок:"<<wa<<endl;
-    if (wa <= 1) cout << "Оценка 5" << endl;
-    if (wa >= 2 && wa <=3) cout << "Оценка 4" << endl;
-    if (wa >= 4 && wa <=6) cout << "Оценка 3" << endl;
-    if (wa > 6) cout << "Оценка 2" << endl;
-    cout << "Неверно решенные задания" << endl;
+    if (wa <= 1) {mark = 5; cout << "Оценка 5" << endl;}
+    if (wa >= 2 && wa <=3) {mark = 4;cout << "Оценка 4" << endl;}
+    if (wa >= 4 && wa <=6) {mark = 3; cout << "Оценка 3" << endl;}
+    if (wa > 6) {mark = 2;cout << "Оценка 2" << endl;
+        for (int j = 0; j < 8; j++){
+            if (st.marks[j] < 5 && st.marks[j] > 0){
+                len++;
+            }
+        }
+        st.marks[len - 1] = mark;
+        cout << "Неверно решенные задания" << endl;}
     for (int i = 0; i < wa; i++){
         cout << wrong_answers[i].question << endl;
         cout << wrong_answers[i].answers[0] << endl;
@@ -214,9 +238,10 @@ void test(string name){
         cout << "Ваш ответ:"<< answers[i]<<endl;
         cout << "Правильный ответ:"<<right_answers[i] <<endl;
     }
-    choice();
+    choice(st);
 }
-void tema_trening(){
+
+void tema_trening(student st){
     int k;
     cout << "Выберите тему: 1 - циклы, 2 - массивы одномерные и двумерные, 3 - строки, 4 - рекурсия, 5 - структуры, 6 - файлы, 7 - адреса и указатели, 8 - динамическая память"<<endl;
     do{
@@ -225,17 +250,17 @@ void tema_trening(){
             cout << "Выберите тему: 1 - циклы, 2 - массивы одномерные и двумерные, 3 - строки, 4 - рекурсия, 5 - структуры, 6 - файлы, 7 - адреса и указатели, 8 - динамическая память"<< endl;
     }while(k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8);
     switch(k){
-        case 1: {train("cycles.txt"); break;}
-        case 2: {train("arrays.txt"); break;}
-        case 3: {train("lines.txt"); break;}
-        case 4: {train("recursion.txt"); break;}
-        case 5: {train("sructure.txt"); break;}
-        case 6: {train("files.txt"); break;}
-        case 7: {train("addresses and pointers.txt"); break;}
-        case 8: {train("dynamic memory.txt"); break;}
+        case 1: {train("cycles.txt", st); break;}
+        case 2: {train("arrays.txt", st); break;}
+        case 3: {train("lines.txt", st); break;}
+        case 4: {train("recursion.txt", st); break;}
+        case 5: {train("sructure.txt", st); break;}
+        case 6: {train("files.txt", st); break;}
+        case 7: {train("addresses and pointers.txt", st); break;}
+        case 8: {train("dynamic memory.txt", st); break;}
     }
 }
-void tema_test(){
+void tema_test(student st){
     int k;
     cout << "Выберите тему: 1 - циклы, 2 - массивы одномерные и двумерные, 3 - строки, 4 - рекурсия, 5 - структуры, 6 - файлы, 7 - адреса и указатели, 8 - динамическая память"<<endl;
     do{
@@ -244,16 +269,21 @@ void tema_test(){
             cout << "Выберите тему: 1 - циклы, 2 - массивы одномерные и двумерные, 3 - строки, 4 - рекурсия, 5 - структуры, 6 - файлы, 7 - адреса и указатели, 8 - динамическая память"<< endl;
     }while(k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8);
     switch(k){
-        case 1: {test("cycles.txt"); break;}
-        case 2: {test("arrays.txt"); break;}
-        case 3: {test("lines.txt"); break;}
-        case 4: {test("recursion.txt"); break;}
-        case 5: {test("sructure.txt"); break;}
-        case 6: {test("files.txt"); break;}
-        case 7: {test("addresses and pointers.txt"); break;}
-        case 8: {test("dynamic memory.txt"); break;}
+        case 1: {test("cycles.txt", st); break;}
+        case 2: {test("arrays.txt", st); break;}
+        case 3: {test("lines.txt", st); break;}
+        case 4: {test("recursion.txt", st); break;}
+        case 5: {test("sructure.txt", st); break;}
+        case 6: {test("files.txt", st); break;}
+        case 7: {test("addresses and pointers.txt", st); break;}
+        case 8: {test("dynamic memory.txt", st); break;}
     }
 }
+
+
+
+
 void finish_test(){
     
 }
+
