@@ -27,10 +27,10 @@
     <ClCompile Include="student.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="prepod.cpp">
+    <ClCompile Include="prepwrong.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="практика итог.cpp">
+    <ClCompile Include="prepodavatel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

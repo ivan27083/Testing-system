@@ -130,9 +130,9 @@
     <ClCompile Include="files.cpp" />
     <ClCompile Include="Main menu.cpp" />
     <ClCompile Include="convertor.cpp" />
-    <ClCompile Include="prepod.cpp" />
+    <ClCompile Include="prepwrong.cpp" />
     <ClCompile Include="student.cpp" />
-    <ClCompile Include="практика итог.cpp" />
+    <ClCompile Include="prepodavatel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />

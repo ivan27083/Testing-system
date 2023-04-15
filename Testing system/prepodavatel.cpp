@@ -828,10 +828,11 @@ void  sort_sredn(student* person, int& kolvo_studentov) {
 }
 
 void student_menu() {
-    int kolvo_studentov = 3;//нужно передать из файла
+    system("chcp 1251");
+    int kolvo_studentov = 0;//нужно передать из файла
     int menu = -1, menu1 = -1, menu2 = -1;
-    student* person = new student[kolvo_studentov];//массив со структурой
-    {
+    student* person = new student[1];//массив со структурой
+   /* {
         person[0].name = "Олег";
         person[0].surname = "Волков";
         person[0].login = "kugtduf";
@@ -878,6 +879,13 @@ void student_menu() {
         person[2].exam_mark = 49;
         person[2].sr_mark = 3.2;
 
+        }*/
+    fstream students("students.txt");
+    while (!students.eof()) {
+        append_s(person, kolvo_studentov);
+        decode_student(person[kolvo_studentov], students);
+        kolvo_studentov++;
+    }
 
         cout << "СПИСОК СТУДЕНТОВ" << endl;
         for (int i = 0; i < kolvo_studentov; i++)
@@ -898,7 +906,7 @@ void student_menu() {
             cout << "sr znach=" << person[i].sr_mark << endl;
             cout << endl << endl;
         }
-    }
+    
     while (menu != 0) {
         cout << "\n\tРабота со списком студентов";
         cout << "\n1)Удаление студентов\n2)Регистрация студентов\n3)Вывод с сортировкой \n4)Вывод списка студентов с оценками по категориям\n0)Выход\n";
@@ -993,6 +1001,10 @@ void student_menu() {
             case 4: otsenki_sredn(person, kolvo_studentov);  break;
             }
         }
+    }
+    for (int i = 0;i < kolvo_studentov;i++)
+    {
+        code_student(person[i], students);
     }
 }
 
@@ -1102,28 +1114,37 @@ void change_question(quest* vopros, int& kolvo_voprosov)
 
 void question_menu()
 {
-    int kolvo_voprosov = 3;//нужно передать из файла
+    system("chcp 1251");
+    fstream vopros1("cycles_hex.txt");
+    fstream vopros2("arrays_hex.txt");
+    fstream vopros3("lines_hex.txt");
+    fstream vopros4("recursion_hex.txt");
+    fstream vopros5("structure_hex.txt");
+    fstream vopros6("files_hex.txt");
+    fstream vopros7("addresses_and_pointers_hex.txt");
+    fstream vopros8("dynamic_memory_hex.txt");
+    int kolvo_voprosov;//нужно передать из файла
     int menu = -1, menu1 = -1;
-    quest* vopros = new quest[kolvo_voprosov];//массив со структурой
+    quest* vopros = new quest[1];//массив со структурой
+    /* {
+        vopros[0].question = "№1lalal?";
+        vopros[0].answers[0] = "1)da";
+        vopros[0].answers[1] = "2)net";
+        vopros[0].answers[2] = "3)maybe";
+        vopros[0].answers[3] = "4)sure*";
 
-    vopros[0].question = "№1lalal?";
-    vopros[0].answers[0] = "1)da";
-    vopros[0].answers[1] = "2)net";
-    vopros[0].answers[2] = "3)maybe";
-    vopros[0].answers[3] = "4)sure*";
+        vopros[1].question = "№2geeergerreg ergegrg?";
+        vopros[1].answers[0] = "1)rrr rr";
+        vopros[1].answers[1] = "2)neeeeet*";
+        vopros[1].answers[2] = "3)maybrrrrre";
+        vopros[1].answers[3] = "4)surwwwwwwwe";
 
-    vopros[1].question = "№2geeergerreg ergegrg?";
-    vopros[1].answers[0] = "1)rrr rr";
-    vopros[1].answers[1] = "2)neeeeet*";
-    vopros[1].answers[2] = "3)maybrrrrre";
-    vopros[1].answers[3] = "4)surwwwwwwwe";
-
-    vopros[2].question = "№3l l l l l?";
-    vopros[2].answers[0] = "1)e233*";
-    vopros[2].answers[1] = "2)да";
-    vopros[2].answers[2] = "3)нет";
-    vopros[2].answers[3] = "4)может быть";
-
+        vopros[2].question = "№3l l l l l?";
+        vopros[2].answers[0] = "1)e233*";
+        vopros[2].answers[1] = "2)да";
+        vopros[2].answers[2] = "3)нет";
+        vopros[2].answers[3] = "4)может быть";
+    }*/
     while (menu1 < 0 || menu1>8)
     {
         cout << "\nМЕНЮ ТЕМ\n";
@@ -1135,14 +1156,63 @@ void question_menu()
     switch (menu1)
     {
     case 0: cout << "Выход из меню" << endl; break;
-    case 1: break;//Циклы
-    case 2: break;//Массивы
-    case 3: break;//Строки
-    case 4: break;//Рекурсия
-    case 5: break;//Структуры
-    case 6: break;//Файлы
-    case 7: break;//Адреса и указатели
-    case 8: break;//Динамическая память
+    case 1:
+        kolvo_voprosov = 0;
+        while (!vopros1.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros1);
+            kolvo_voprosov++;
+        }
+        break;//Циклы
+    case 2:
+        kolvo_voprosov = 0;
+        while (!vopros2.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros2);
+            kolvo_voprosov++;
+        }break;//Массивы
+    case 3: 
+        kolvo_voprosov = 0;
+        while (!vopros3.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros3);
+            kolvo_voprosov++;
+        }break;//Строки
+    case 4: 
+        kolvo_voprosov = 0;
+        while (!vopros4.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros4);
+            kolvo_voprosov++;
+        }break;//Рекурсия
+    case 5:
+        kolvo_voprosov = 0;
+        while (!vopros5.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros5);
+            kolvo_voprosov++;
+        }break;//Структуры
+    case 6:
+        kolvo_voprosov = 0;
+        while (!vopros6.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros6);
+            kolvo_voprosov++;
+        }break;//Файлы
+    case 7:
+        kolvo_voprosov = 0;
+        while (!vopros7.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros7);
+            kolvo_voprosov++;
+        }break;//Адреса и указатели
+    case 8: 
+        kolvo_voprosov = 0;
+        while (!vopros8.eof()) {
+            append_q(vopros, kolvo_voprosov);
+            decode_question(vopros[kolvo_voprosov], vopros8);
+            kolvo_voprosov++;
+        }break;//Динамическая память
     }
     if (menu1 != 0) {
         while (menu != 0) {
@@ -1192,7 +1262,57 @@ void question_menu()
                 }break;
             }
         }
-
+        switch (menu1)
+        {
+        case 1:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros1);
+            }
+            break;//Циклы
+        case 2:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros2);
+            }
+            break;//Массивы
+        case 3:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros3);
+            }
+            break;//Строки
+        case 4:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros4);
+            }
+            break;//Рекурсия
+        case 5:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros5);
+            }
+            break;//Структуры
+        case 6:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros6);
+            }
+            break;//Файлы
+        case 7:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros7);
+            }
+            break;//Адреса и указатели
+        case 8:
+            for (int i = 0;i < kolvo_voprosov;i++)
+            {
+                code_question(vopros[i], vopros8);
+            }
+            break;//Динамическая память
+        }
     }
 }
 
