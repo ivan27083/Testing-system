@@ -112,6 +112,34 @@ void decode_student(student &surname, fstream& f) {
 	int i = 0;
 	while (i != a.length()) {
 		if (a[i] == '.') {
+			surname.name += char(hexToDec(b));
+			b = "";
+			i++;
+		}
+		else {
+			b += a[i];
+			i++;
+		}
+	}
+	a = "", b = "";
+	getline(f, a);
+	i = 0;
+	while (i != a.length()) {
+		if (a[i] == '.') {
+			surname.surname += char(hexToDec(b));
+			b = "";
+			i++;
+		}
+		else {
+			b += a[i];
+			i++;
+		}
+	}
+	a = "", b = "";
+	getline(f, a);
+	i = 0;
+	while (i != a.length()) {
+		if (a[i] == '.') {
 			surname.login += char(hexToDec(b));
 			b = "";
 			i++;

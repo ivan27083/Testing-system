@@ -82,10 +82,11 @@
 3)Массив одномерных массивов;*
 4)Массив из двух и более строк;
 
-№15 Для чего используется delete [] array;?
- Для очищения массива array
- Для освобождения памяти, отводимой под массив array
- Для удаления элементов массива array
+№15 Как заполнить двумерный массив arr значениями 0?
+1)for (int i = 0; i < sizeof(arr)/sizeof(float); i++) { arr[i] = 0; };
+2)for (int i = 0; i < sizeof(arr); i++) { arr[i] = 0; };
+3)for (int i = 0; i < 99; i++) { arr[i] = 0; };
+4)for (int i = 0; i < 3; i++) { for (int j = 0; j < 4; j++) { arr[i][j] = 0; } };*
 
 №16 Как заполнить одномерный массив arr случайными числами от 0 до 99?
 1)for (int i = 0; i < sizeof(arr)/sizeof(int); i++) { arr[i] = rand() % 99; };
@@ -99,11 +100,6 @@
 3)for (int i = 0; i < 99; i++) { cout << arr[i] << " "; };
 4)for (int i = 0; i < 10; i++) { cout << arr[i] << " "; };*
 
-№18 Как заполнить двумерный массив arr значениями 0?
-1)for (int i = 0; i < sizeof(arr)/sizeof(float); i++) { arr[i] = 0; };
-2)for (int i = 0; i < sizeof(arr); i++) { arr[i] = 0; };
-3)for (int i = 0; i < 99; i++) { arr[i] = 0; };
-4)for (int i = 0; i < 3; i++) { for (int j = 0; j < 4; j++) { arr[i][j] = 0; } };*
 №18 Как вывести элементы двумерного массива arr на экран?
 1)for (int i = 0; i < sizeof(arr)/sizeof(float); i++) { cout << arr[i] << " "; };
 2)for (int i = 0; i < sizeof(arr); i++) { cout << arr[i] << " "; };
@@ -180,4 +176,4 @@
 1)int min_index = sizeof(arr)/sizeof(int);
 2)int min_index = sizeof(arr);
 3)int min_index_i = 0, min_index_j = 0; for (int i = 0; i < 3; i++) { for (int j = 0; j < 4; j++) { if (arr[i][j] < arr[min_index_i][min_index_j]) { min_index_i = i; min_index_j = j; } } } int min_index = min_index_i*4+min_index_j;*
-4)int min_index = arr[0][0
+4)int min_index = arr[0][0];

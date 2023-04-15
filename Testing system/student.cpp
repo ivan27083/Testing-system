@@ -1,17 +1,22 @@
 #include "student.h"
 #include "files.h"
 #include <time.h>
+#include <string>
 using namespace std;
 
-void choice(student st) {
+void choice(student& st) {
     int k;
-    cout << "Выберите режим\n1 - тренинг по теме\n2 - тестирование по теме\n3 - итоговый тест" << endl;
-    cin >> k;
-    switch (k) {
-    case 1: {tema_trening(st); break; }
-    case 2: {tema_test(st); break; }
-    case 3: {finish_test(st); break; }
-    }
+    bool p = true;
+    do {
+        cout << "Выберите режим\n1 - тренинг по теме\n2 - тестирование по теме\n3 - итоговый тест\n0 - Выход" << endl;
+        cin >> k;
+        switch (k) {
+        case 0: p = false; break;
+        case 1: tema_trening(st); break;
+        case 2: tema_test(st); break;
+        case 3: finish_test(st); break;
+        }
+    } while (p);
 }
 void student_login() {
     setlocale(LC_ALL, "Rus");
@@ -42,7 +47,11 @@ void student_login() {
         }
         if (flag == true) cout << "Доступ запрещен. Введите корректный логин и пароль" << endl;
     } while (flag);
+    students.close();
+    fstream studentss("students.txt", ios::out);
+    code_student(arr[l], studentss);
     delete[] arr;
+    studentss.close();
 }
 
 void train(fstream& f, student& st) {
@@ -93,7 +102,6 @@ void train(fstream& f, student& st) {
             else cout << "Ответ неверный, попробуйте еще раз " << endl;
         } while (p);
     }
-    choice(st);
 }
 void test(fstream& f, student& st, int t) {
     char zv;
@@ -172,10 +180,9 @@ void test(fstream& f, student& st, int t) {
         }
     }
     st.marks[t] = mark;
-    choice(st);
 }
 
-void tema_trening(student st) {
+void tema_trening(student& st) {
     int k;
     fstream cycles("cycles_hex.txt");
     fstream arrays("arrays_hex.txt");
@@ -210,7 +217,7 @@ void tema_trening(student st) {
     addresses_and_pointers.close();
     dynamic_memory.close();
 }
-void tema_test(student st) {
+void tema_test(student& st) {
     int k;
     fstream cycles("cycles_hex.txt");
     fstream arrays("arrays_hex.txt");
@@ -227,14 +234,14 @@ void tema_test(student st) {
             cout << "Выберите тему: 1 - циклы, 2 - массивы одномерные и двумерные, 3 - строки, 4 - рекурсия, 5 - структуры, 6 - файлы, 7 - адреса и указатели, 8 - динамическая память" << endl;
     } while (k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8);
     switch (k) {
-    case 1: {test(cycles, st, k); break; }
-    case 2: {test(arrays, st, k); break; }
-    case 3: {test(lines, st, k); break; }
-    case 4: {test(recursion, st, k); break; }
-    case 5: {test(sructure, st, k); break; }
-    case 6: {test(files, st, k); break; }
-    case 7: {test(addresses_and_pointers, st, k); break; }
-    case 8: {test(dynamic_memory, st, k); break; }
+    case 1: {test(cycles, st, k-1); break; }
+    case 2: {test(arrays, st, k-1); break; }
+    case 3: {test(lines, st, k-1); break; }
+    case 4: {test(recursion, st, k-1); break; }
+    case 5: {test(sructure, st, k-1); break; }
+    case 6: {test(files, st, k-1); break; }
+    case 7: {test(addresses_and_pointers, st, k-1); break; }
+    case 8: {test(dynamic_memory, st, k-1); break; }
     }
     cycles.close();
     arrays.close();
@@ -246,11 +253,7 @@ void tema_test(student st) {
     dynamic_memory.close();
 }
 
-void finish_test(student st) {
-    string que, t;
-    quest wrong_answers[40];
-    int answers[40];
-    int right_answers[40];
+void finish_test(student &st) {
     char zv;
     int n, k, answer;
     k = 0;
@@ -258,14 +261,24 @@ void finish_test(student st) {
     zv = '*';
     int len[8];
     fstream f;
-    quest** all_questions = new quest* [8];
-    for (int c = 0; c < 8; c++) {
-        switch (c) {
+    int wrong[10];
+    int wa = 0;
+    quest question[40];
+    int prev = -1, cur;
+    srand(time(NULL));
+    bool p;
+    bool questions_num[8][40]{false};
+    for (int i = 0; i < 40; i++) {
+        p = true;
+        do {
+            cur = rand() % 8;
+        } while (cur == prev);
+        switch (cur) {
         case 0: f.open("cycles_hex.txt"); break;
         case 1: f.open("arrays_hex.txt"); break;
         case 2: f.open("lines_hex.txt"); break;
         case 3: f.open("recursion_hex.txt"); break;
-        case 4: f.open("sructure_hex.txt"); break;
+        case 4: f.open("structure_hex.txt"); break;
         case 5: f.open("files_hex.txt"); break;
         case 6: f.open("addresses_and_pointers_hex.txt"); break;
         case 7: f.open("dynamic_memory_hex.txt"); break;
@@ -277,7 +290,6 @@ void finish_test(student st) {
             decode_question(q[n], f);
             n++;
         }
-        len[c] = n;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < 4; j++) {
                 if (q[i].answers[j][q[i].answers[j].size() - 1] == zv) {
@@ -286,100 +298,36 @@ void finish_test(student st) {
                 }
             }
         }
-        all_questions[c] = q;
+        do {
+            p = true;
+            int r = rand() % n;
+            if (questions_num[cur][r] == true) p = false;
+            else {
+                questions_num[cur][r] = true;
+                question[i] = q[r];
+            }
+        } while (!p);
+        prev = cur;
         delete[] q;
         f.close();
     }
-    quest question[40];
-    int prev = -1, cur;
-    srand(time(NULL));
-    bool p;
-    int questions_num[8][40];
     for (int i = 0; i < 40; i++) {
         p = true;
-        do {
-            cur = rand() % 8;
-        } while (cur == prev);
-        do {
-            int r = rand() % len[cur];
-            for (int j = 0; j < len[cur]; j++) if (r == questions_num[cur][j]) p = false;
-            questions_num[cur][r] = 1;
-            question[i] = all_questions[cur][r];
-        } while (!p);
-        prev = cur;
-    }
-    /*int count = 0;
-    int temp = -1;
-    int g = 0;
-    int wa = 0;
-    for (int u = 0; u < 8; u++)
-        for (int f = 0; f < 40; f++) {
-            questions_num[u][f] = -1;
-        }
-    for (int i = 0; i < 3; i++) {
-        do {
-            n = rand() % 4;
-        } while (n == temp);
-        temp = n;
-        //cout << n;
-        do {
-            count = 0;
-            g = rand() % 2;
-            for (int h = 0; h < 10; h++) {
-                //cout << g << questions_num[n][h];
-                if (g == questions_num[temp][h]) count++;
-            }
-        } while (count > 0);
-        //cout << n<< g<< endl;
-//        g = rand() % 2;
-        questions_num[n][i] = g;
-        //cout << g << questions_num[n][i];
-        que = arr[n][g].question;
+        cout << question[i].question << endl;
         for (int j = 0; j < 4; j++) {
-            t = arr[n][g].answers[j];
-            for (int l = 0; l < size(t); l++) {
-                char  h = t[l];
-                if (h == zv) {
-                    k = j + 1;
-                    arr[n][g].answers[j].resize(arr[n][g].answers[j].size() - 1);
-                }
-            }
+            cout << question[i].answers[j] << endl;
         }
-        ans1 = arr[n][g].answers[0];
-        ans2 = arr[n][g].answers[1];
-        ans3 = arr[n][g].answers[2];
-        ans4 = arr[n][g].answers[3];
-        cout << que << endl;
-        cout << ans1 << endl;
-        cout << ans2 << endl;
-        cout << ans3 << endl;
-        cout << ans4 << endl;
-        cout << "Введите ответ на вопрос" << endl;
+        cout << "Введите ответ на вопрос:";
         cin >> answer;
-        if (answer != k) {
-            wrong_answers[wa] = arr[n][g];
-            answers[wa] = answer;
-            right_answers[wa] = k;
-            wa++;
-        }
+        if (answer == question[i].right_answer) p = false;
+        else wa++;
     }
-
-    cout << "количество ошибок:" << wa << endl;
-    if (wa <= 3) { mark = 5; cout << "Оценка 5" << endl; }
-    if (wa >= 4 && wa <= 6) { mark = 4; cout << "Оценка 4" << endl; }
-    if (wa >= 7 && wa <= 9) { mark = 3; cout << "Оценка 3" << endl; }
-    if (wa > 10) { mark = 2; cout << "Оценка 2" << endl; }
+    if ((40 - wa) / 40.0 >= 0.85) mark = 5;
+    else if ((40 - wa) / 40.0 >= 0.7) mark = 4;
+    else if ((40 - wa) / 40.0 >= 0.5) mark = 3;
+    else mark = 2;
+    cout << endl;
+    cout << "Количество ошибок: " << wa << endl;
+    cout << "Ваша оценка: " << mark << endl;
     st.exam_mark = mark;
-
-    //    cout << "Неверно решенные задания" << endl;}
-    //    for (int i = 0; i < wa; i++){
-    //        cout << wrong_answers[i].question << endl;
-    //        cout << wrong_answers[i].answers[0] << endl;
-    //        cout << wrong_answers[i].answers[1]<< endl;
-    //        cout << wrong_answers[i].answers[2] << endl;
-    //        cout << wrong_answers[i].answers[3] << endl;
-    //        cout << "Ваш ответ:"<< answers[i]<<endl;
-    //        cout << "Правильный ответ:"<<right_answers[i] <<endl;
-    //    }
-    choice(st);*/
 }

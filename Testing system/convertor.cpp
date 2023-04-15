@@ -31,8 +31,8 @@ int main() {
 	fstream ivan("students.txt",ios::app);
 	code_student(Ivan, ivan);
 	f.close();
-	fstream file("structure.txt");
-	fstream q1_res("res.txt", ios::app);
+	fstream file("cycles.txt");
+	fstream q1_res("cycles_hex.txt");
 	string mess;
 	quest adr_and_point[30];
 	for (int i = 0; i < 30; i++) {
@@ -44,19 +44,9 @@ int main() {
 	}
 	for (int i = 0; i < 30; i++) {
 		code_question(adr_and_point[i], q1_res);
+		if (i != 29) q1_res << '\n';
 	}
 	q1_res.close();
-	fstream q1_res_r("res.txt");
-	for (int i = 0; i < 30; i++) {
-		decode_question(adr_and_point[i], q1_res_r);
-	}
 	file.close();
-	q1_res_r.close();
-	fstream file_a("res.txt", ios::app);
-	code_student(Ivan, file_a);
-	file_a.close();
-	fstream file_r("res.txt");
-	decode_student(Ivan,file_r);
-	file_r.close();
 	return 0;
 }*/
