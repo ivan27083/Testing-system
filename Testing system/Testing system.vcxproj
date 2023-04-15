@@ -129,8 +129,10 @@
   <ItemGroup>
     <ClCompile Include="files.cpp" />
     <ClCompile Include="Main menu.cpp" />
-    <ClCompile Include="student.cpp" />
     <ClCompile Include="convertor.cpp" />
+    <ClCompile Include="prepod.cpp" />
+    <ClCompile Include="student.cpp" />
+    <ClCompile Include="практика итог.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
@@ -154,6 +156,7 @@
     <Text Include="recursion_hex.txt" />
     <Text Include="structure_hex.txt" />
     <Text Include="structure.txt" />
+    <Text Include="students.txt" />
     <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -14,8 +14,8 @@ int main() {
 	fstream f("test.txt");
 	student Ivan;
 	string s;
-	f >> Ivan.login;
-	f >> Ivan.password;
+	getline(f, Ivan.login);
+	getline(f, Ivan.password);
 	
 	int j = 0;
 	for (int i = 0; i < 8; i++) {
@@ -28,6 +28,8 @@ int main() {
 		sum += Ivan.marks[i];
 	}
 	Ivan.sr_mark = sum / 8.0;
+	fstream ivan("students.txt",ios::app);
+	code_student(Ivan, ivan);
 	f.close();
 	fstream file("structure.txt");
 	fstream q1_res("res.txt", ios::app);
@@ -50,11 +52,11 @@ int main() {
 	}
 	file.close();
 	q1_res_r.close();
-	//fstream file_a("res.txt", ios::app);
-	//code_student(Ivan, file_a);
-	//file_a.close();
-	//fstream file_r("res.txt");
-	//decode_student(Ivan,file_r);
-	//file_r.close();
+	fstream file_a("res.txt", ios::app);
+	code_student(Ivan, file_a);
+	file_a.close();
+	fstream file_r("res.txt");
+	decode_student(Ivan,file_r);
+	file_r.close();
 	return 0;
 }*/

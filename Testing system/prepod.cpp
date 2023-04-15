@@ -1,9 +1,8 @@
 #include <iostream>
-#include "student.h"
 #include "prepod.h"
 using namespace std;
 
-int main(int argc, char** argv)
+/*int main(int argc, char** argv)
 {
     setlocale(LC_ALL, "Rus");
     int q;
@@ -13,12 +12,11 @@ int main(int argc, char** argv)
         cin >> q;
         switch (q) {
         case 0: check = false; break;
-        case 1: student_login();
-            continue;
-        case 2: prepod_login();
+        case 1: continue;
+        case 2: prepod();
             continue;
         default: cout << "¬ведено некорректное значение" << endl;
         }
     } while (check);
     return 0;
-}
+}*/

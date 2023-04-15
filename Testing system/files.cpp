@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <sstream>
 #include "files.h"
 using namespace std;
@@ -36,15 +35,37 @@ int hexToDec(string hex) {
 	return dec;
 }
 
+void append_s(student *&mas, int n){
+	student* mass = new student[n+1];
+	for (int i = 0; i < n; i++) {
+		mass[i] = mas[i];
+	}
+	mas = new student[n+1];
+	for (int i = 0; i < n; i++) {
+		mas[i] = mass[i];
+	}
+}
+
+void append_q(quest*& mas, int n) {
+	quest* mass = new quest[n + 1];
+	for (int i = 0; i < n; i++) {
+		mass[i] = mas[i];
+	}
+	mas = new quest[n + 1];
+	for (int i = 0; i < n; i++) {
+		mas[i] = mass[i];
+	}
+}
+
 void code_student(student surname, fstream& f) {
 	string login="", password="", marks="";
 	for (int i = 0; i < surname.login.length(); i++) {
-		login += inttohex(int(surname.login[i])) + ".";
+		login += inttohex(int(unsigned char(surname.login[i]))) + ".";
 	}
 	f << login;
 	f << "\n";
 	for (int i = 0; i < surname.password.length(); i++) {
-		password += inttohex(int(surname.password[i])) + ".";
+		password += inttohex(int(unsigned char(surname.password[i]))) + ".";
 	}
 	f << password;
 	f << "\n";
@@ -76,9 +97,9 @@ void code_question(quest quest, fstream& f) {
 	}
 }
 
-void decode_student(student surname, fstream& f) {
+void decode_student(student &surname, fstream& f) {
 	string a="", b = "";
-	f >> a;
+	getline(f, a);
 	int i = 0;
 	while (i != a.length()) {
 		if (a[i] == '.') {
@@ -92,7 +113,7 @@ void decode_student(student surname, fstream& f) {
 		}
 	}
 	a = "", b = "";
-	f >> a;
+	getline(f, a);
 	i = 0;
 	while (i != a.length()) {
 		if (a[i] == '.') {
@@ -106,12 +127,12 @@ void decode_student(student surname, fstream& f) {
 		}
 	}
 	a = "", b = "";
-	f >> a;
+	getline(f, a);
 	i = 0;
 	int j = 0;
 	while (i != a.length()) {
 		if (a[i] == '.') {
-			surname.marks[j++] = int(char(hexToDec(b)));
+			surname.marks[j++] = hexToDec(b)-48;
 			b = "";
 			i++;
 		}
@@ -121,10 +142,10 @@ void decode_student(student surname, fstream& f) {
 		}
 	}
 	a = "";
-	f >> a;
+	getline(f, a);
 	surname.exam_mark = int(char(hexToDec(a)));
 }
-void decode_question(quest quest, fstream& f) {
+void decode_question(quest& quest, fstream& f) {
 	string a = "", b = "";
 	int i = 0;
 	getline(f, a);

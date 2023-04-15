@@ -18,13 +18,19 @@
     <ClCompile Include="Main menu.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="student.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="files.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="convertor.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="student.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="prepod.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="практика итог.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,5 +63,6 @@
     <Text Include="lines_hex.txt" />
     <Text Include="recursion_hex.txt" />
     <Text Include="structure_hex.txt" />
+    <Text Include="students.txt" />
   </ItemGroup>
 </Project>
