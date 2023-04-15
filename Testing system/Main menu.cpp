@@ -9,7 +9,8 @@ int main(int argc, char** argv)
     int q;
     bool check = true;
     do {
-        cout << "Выберите режим:" << endl << "1 - Режим студента" << endl << "2 - Режим преподавателя" << endl;
+        cout << "Выберите режим:" << endl << "1 - Режим студента" << endl << "2 - Режим преподавателя" << endl<< "0 - Выход" << endl;
+        cout << "Введите нужный вариант: ";
         cin >> q;
         switch (q) {
         case 0: check = false; break;

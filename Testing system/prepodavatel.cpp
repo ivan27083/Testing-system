@@ -777,6 +777,7 @@ void del_student(student*& person, int& kolvo_studentov)
     person = new student[kolvo_studentov];
     person = person2;
     cout << "Студент номер " << n + 1 << " удален" << endl;
+    //delete[] person2;
     //student_menu();
 }
 
@@ -800,8 +801,8 @@ void add_student(student*& person, int& kolvo_studentov)
     {
         person2[kolvo_studentov - 1].marks[j] = -1;
     }
-    person2[kolvo_studentov - 1].exam_mark = -1;/////////////////////не забыть убрать 20
-    person2[kolvo_studentov - 1].sr_mark = 2.5;
+    person2[kolvo_studentov - 1].exam_mark = -1;
+    person2[kolvo_studentov - 1].sr_mark = -1;
 
     person = new student[kolvo_studentov];
     person = person2;
@@ -809,7 +810,7 @@ void add_student(student*& person, int& kolvo_studentov)
     //student_menu();
 }
 
-void  sort_sredn(student* person, int& kolvo_studentov) {
+void sort_sredn(student* person, int& kolvo_studentov) {
 
     for (double n = 5; n > 0; n -= 0.1) {
         n = round(n * 10) / 10;
@@ -887,7 +888,7 @@ void student_menu() {
         kolvo_studentov++;
     }
 
-        cout << "СПИСОК СТУДЕНТОВ" << endl;
+        /*cout << "СПИСОК СТУДЕНТОВ" << endl;
         for (int i = 0; i < kolvo_studentov; i++)
         {
             cout << endl << i + 1 << endl;
@@ -905,9 +906,10 @@ void student_menu() {
             cout << person[i].exam_mark << endl;
             cout << "sr znach=" << person[i].sr_mark << endl;
             cout << endl << endl;
-        }
+        }*/
     
-    while (menu != 0) {
+    while (menu != 0) 
+    {
         cout << "\n\tРабота со списком студентов";
         cout << "\n1)Удаление студентов\n2)Регистрация студентов\n3)Вывод с сортировкой \n4)Вывод списка студентов с оценками по категориям\n0)Выход\n";
 
@@ -921,8 +923,9 @@ void student_menu() {
         switch (menu)
         {
         case 0: cout << "\nВыход"; break;
-        case 1: del_student(person, kolvo_studentov);
-            /////////////////////////////////
+        case 1: { del_student(person, kolvo_studentov);
+
+            /*
             for (int i = 0; i < kolvo_studentov; i++)
             {
                 cout << endl << i + 1 << endl;
@@ -940,10 +943,10 @@ void student_menu() {
                 cout << person[i].exam_mark << endl;
                 cout << "sr znach=" << person[i].sr_mark << endl;
                 cout << endl << endl;
-            }
+            }*/
 
-            break;
-        case 2: add_student(person, kolvo_studentov);
+            break;}
+        case 2: {add_student(person, kolvo_studentov);
             ///////////////////////////////////////////
             for (int i = 0; i < kolvo_studentov; i++)
             {
@@ -965,25 +968,24 @@ void student_menu() {
             }
 
 
-            break;
-        case 3:
-            cout << "\n\tВывод рейтинга студентов";
-            cout << "\n1)по всем темам\n2)по конктретной теме \n3)только итоговый тест\n4) только средний балл\n0)Выход\n";
-            do {
-                cout << "\nВведите нужный вариант: ";
-                cin >> menu2;
-                if (menu < 0 || menu > 4) cout << "введено неверное значение. попробуйте снова." << endl;
-            } while (menu2 < 0 || menu2>4);
+            break;}
+        case 3: {cout << "\n\tВывод рейтинга студентов";
+        cout << "\n1)по всем темам\n2)по конктретной теме \n3)только итоговый тест\n4) только средний балл\n0)Выход\n";
+        do {
+            cout << "\nВведите нужный вариант: ";
+            cin >> menu2;
+            if (menu < 0 || menu > 4) cout << "введено неверное значение. попробуйте снова." << endl;
+        } while (menu2 < 0 || menu2>4);
 
-            switch (menu2)
-            {
-            case 0: cout << "\nВыход"; break;
-            case 1: sort_vse(person, kolvo_studentov); break;
-            case 2: sort_tema(person, kolvo_studentov); break;
-            case 3: sort_itog(person, kolvo_studentov); break;
-            case 4: sort_sredn(person, kolvo_studentov); break;
-            }
-        case 4:
+        switch (menu2)
+        {
+        case 0: cout << "\nВыход"; break;
+        case 1: sort_vse(person, kolvo_studentov); break;
+        case 2: sort_tema(person, kolvo_studentov); break;
+        case 3: sort_itog(person, kolvo_studentov); break;
+        case 4: sort_sredn(person, kolvo_studentov); break;
+        }}
+        case 4: {
             cout << "\n\tВывод оценок студентов";
             cout << "\n1)по всем темам\n2)по конктретной теме \n3)только итоговый тест \n4) только средний балл\n0)Выход\n";
             do {
@@ -1001,11 +1003,22 @@ void student_menu() {
             case 4: otsenki_sredn(person, kolvo_studentov);  break;
             }
         }
-    }
-    for (int i = 0;i < kolvo_studentov;i++)
-    {
-        code_student(person[i], students);
-    }
+        }
+
+        students.close();
+        if (menu != 0) {
+
+            fstream studentt("students.txt", ios::out);
+            for (int i = 0;i < kolvo_studentov;i++)
+            {
+                code_student(person[i], studentt);
+                if (i != kolvo_studentov - 1) studentt << '\n';
+            }
+            studentt.close();
+        }
+
+}
+
 }
 
 void delete_question(quest*& vopros, int& kolvo_voprosov)
@@ -1126,25 +1139,6 @@ void question_menu()
     int kolvo_voprosov;//нужно передать из файла
     int menu = -1, menu1 = -1;
     quest* vopros = new quest[1];//массив со структурой
-    /* {
-        vopros[0].question = "№1lalal?";
-        vopros[0].answers[0] = "1)da";
-        vopros[0].answers[1] = "2)net";
-        vopros[0].answers[2] = "3)maybe";
-        vopros[0].answers[3] = "4)sure*";
-
-        vopros[1].question = "№2geeergerreg ergegrg?";
-        vopros[1].answers[0] = "1)rrr rr";
-        vopros[1].answers[1] = "2)neeeeet*";
-        vopros[1].answers[2] = "3)maybrrrrre";
-        vopros[1].answers[3] = "4)surwwwwwwwe";
-
-        vopros[2].question = "№3l l l l l?";
-        vopros[2].answers[0] = "1)e233*";
-        vopros[2].answers[1] = "2)да";
-        vopros[2].answers[2] = "3)нет";
-        vopros[2].answers[3] = "4)может быть";
-    }*/
     while (menu1 < 0 || menu1>8)
     {
         cout << "\nМЕНЮ ТЕМ\n";
@@ -1171,14 +1165,14 @@ void question_menu()
             decode_question(vopros[kolvo_voprosov], vopros2);
             kolvo_voprosov++;
         }break;//Массивы
-    case 3: 
+    case 3:
         kolvo_voprosov = 0;
         while (!vopros3.eof()) {
             append_q(vopros, kolvo_voprosov);
             decode_question(vopros[kolvo_voprosov], vopros3);
             kolvo_voprosov++;
         }break;//Строки
-    case 4: 
+    case 4:
         kolvo_voprosov = 0;
         while (!vopros4.eof()) {
             append_q(vopros, kolvo_voprosov);
@@ -1206,7 +1200,7 @@ void question_menu()
             decode_question(vopros[kolvo_voprosov], vopros7);
             kolvo_voprosov++;
         }break;//Адреса и указатели
-    case 8: 
+    case 8:
         kolvo_voprosov = 0;
         while (!vopros8.eof()) {
             append_q(vopros, kolvo_voprosov);
@@ -1231,95 +1225,99 @@ void question_menu()
             {
             case 0: cout << "Выход в меню тем" << endl; question_menu(); break;
             case 1: delete_question(vopros, kolvo_voprosov);
-                for (int i = 0; i < kolvo_voprosov; i++)
-                {
-                    cout << vopros[i].question << endl;
-                    cout << vopros[i].answers[0] << endl;
-                    cout << vopros[i].answers[1] << endl;
-                    cout << vopros[i].answers[2] << endl;
-                    cout << vopros[i].answers[3] << endl;
-                    cout << endl;
-                }break;
+                break;
             case 2: add_question(vopros, kolvo_voprosov);
-                for (int i = 0; i < kolvo_voprosov; i++)
-                {
-                    cout << vopros[i].question << endl;
-                    cout << vopros[i].answers[0] << endl;
-                    cout << vopros[i].answers[1] << endl;
-                    cout << vopros[i].answers[2] << endl;
-                    cout << vopros[i].answers[3] << endl;
-                    cout << endl;
-                }break;
+               break;
             case 3: change_question(vopros, kolvo_voprosov);
-                for (int i = 0; i < kolvo_voprosov; i++)
-                {
-                    cout << vopros[i].question << endl;
-                    cout << vopros[i].answers[0] << endl;
-                    cout << vopros[i].answers[1] << endl;
-                    cout << vopros[i].answers[2] << endl;
-                    cout << vopros[i].answers[3] << endl;
-                    cout << endl;
-                }break;
+                break;
             }
         }
+        vopros1.close();
+        vopros2.close();
+        vopros3.close();
+        vopros4.close();
+        vopros5.close();
+        vopros6.close();
+        vopros7.close();
+        vopros8.close();
+
+        fstream v;
+
         switch (menu1)
         {
         case 1:
+            v.open("cycles_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros1);
+                code_question(vopros[i], v);
+                if (i!=kolvo_voprosov-1)v << '\n';
             }
             break;//Циклы
         case 2:
+            v.open("arrays_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros2);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Массивы
         case 3:
+            v.open("lines_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros3);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Строки
         case 4:
+            v.open("recursion_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros4);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Рекурсия
         case 5:
+            v.open("structure_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros5);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Структуры
         case 6:
+            v.open("files_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros6);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Файлы
         case 7:
+            v.open("addresses_and_pointers_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros7);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Адреса и указатели
         case 8:
+            v.open("dynamic_memory_hex.txt", ios::out);
             for (int i = 0;i < kolvo_voprosov;i++)
             {
-                code_question(vopros[i], vopros8);
+                code_question(vopros[i], v);
+                if (i != kolvo_voprosov - 1)v << '\n';
             }
             break;//Динамическая память
         }
+        v.close();
     }
 }
 
 //студенты или вопросы
 void choice() {
     int k = -1;
-    while (k != 0) {
+    
         while (k < 0 || k>2)
         {
             cout << "\nМЕНЮ\n" << endl;
@@ -1333,7 +1331,7 @@ void choice() {
         case 1: {question_menu(); break; }
         case 2: {student_menu(); break; }
         }
-    }
+    
 }
 
 //вход в учётную запись

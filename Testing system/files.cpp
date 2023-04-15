@@ -58,7 +58,17 @@ void append_q(quest*& mas, int n) {
 }
 
 void code_student(student surname, fstream& f) {
-	string login="", password="", marks="";
+	string login="", password="", marks="",name="",surnamee="";
+	for (int i = 0; i < surname.name.length(); i++) {
+		name += inttohex(int(unsigned char(surname.name[i]))) + ".";
+	}
+	f << name;
+	f << "\n";
+	for (int i = 0; i < surname.surname.length(); i++) {
+		surnamee += inttohex(int(unsigned char(surname.surname[i]))) + ".";
+	}
+	f << surnamee;
+	f << "\n";
 	for (int i = 0; i < surname.login.length(); i++) {
 		login += inttohex(int(unsigned char(surname.login[i]))) + ".";
 	}
@@ -77,7 +87,6 @@ void code_student(student surname, fstream& f) {
 	f << "\n";
 	string ex_mark = inttohex(surname.exam_mark + 48) + ".";
 	f << ex_mark;
-	f << "\n";
 }
 
 void code_question(quest quest, fstream& f) {
@@ -93,7 +102,7 @@ void code_question(quest quest, fstream& f) {
 			ans += inttohex(int(unsigned char(quest.answers[i][j]))) + ".";
 		}
 		f << ans;
-		f << "\n";
+		if (i != 3) f << "\n";
 	}
 }
 
