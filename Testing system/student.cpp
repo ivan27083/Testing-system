@@ -5,7 +5,7 @@ using namespace std;
 
 void choice(student st) {
     int k;
-    cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ€ÐµÐ¶Ð¸Ð¼ \n1-Ñ‚Ñ€ÐµÐ½Ð¸Ð½Ð³ Ð¿Ð¾ Ñ‚ÐµÐ¼Ðµ\n 2 - Ñ‚ÐµÑÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ñ‚ÐµÐ¼Ðµ\n 3 - Ð¸Ñ‚Ð¾Ð³Ð¾Ð²Ñ‹Ð¹ Ñ‚ÐµÑÑ‚" << endl;
+    cout << "Âûáåðèòå ðåæèì\n1 - òðåíèíã ïî òåìå\n2 - òåñòèðîâàíèå ïî òåìå\n3 - èòîãîâûé òåñò" << endl;
     cin >> k;
     switch (k) {
     case 1: {tema_trening(st); break; }
@@ -27,11 +27,11 @@ void student_login() {
     }
     string login, password;
     bool flag = true;
-    cout << "ÐÐ²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ ÑÑ‚ÑƒÐ´ÐµÐ½Ñ‚Ð°" << endl;
+    cout << "Àâòîðèçàöèÿ ñòóäåíòà: " << endl;
     do {
-        cout << "Ð›Ð¾Ð³Ð¸Ð½: ";
+        cout << "Ëîãèí: ";
         cin >> login;
-        cout << "ÐŸÐ°Ñ€Ð¾Ð»ÑŒ: ";
+        cout << "Ïàðîëü: ";
         cin >> password;
         for (int i = 0; i < n; i++) {
             if (arr[i].login == login && arr[i].password == password) {
@@ -40,7 +40,7 @@ void student_login() {
                 choice(arr[l]);
             }
         }
-        if (flag == true) cout << "Ð”Ð¾ÑÑ‚ÑƒÐ¿ Ð·Ð°Ð¿Ñ€ÐµÑ‰ÐµÐ½. Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹ Ð»Ð¾Ð³Ð¸Ð½ Ð¸ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ" << endl;
+        if (flag == true) cout << "Äîñòóï çàïðåùåí. Ââåäèòå êîððåêòíûé ëîãèí è ïàðîëü" << endl;
     } while (flag);
     delete[] arr;
 }
@@ -87,10 +87,10 @@ void train(fstream& f, student& st) {
             cout << q[questions_num[i]].answers[j] << endl;
         }
         do {
-            cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ð²ÐµÑ‚:";
+            cout << "Ââåäèòå îòâåò íà âîïðîñ:";
             cin >> answer;
             if (answer == q[questions_num[i]].right_answer) p = false;
-            else cout << "ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ð¾Ñ‚Ð²ÐµÑ‚, Ð¿Ð¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ ÑÐ½Ð¾Ð²Ð°" << endl;
+            else cout << "Îòâåò íåâåðíûé, ïîïðîáóéòå åùå ðàç " << endl;
         } while (p);
     }
     choice(st);
@@ -140,7 +140,7 @@ void test(fstream& f, student& st, int t) {
         for (int j = 0; j < 4; j++) {
             cout << q[questions_num[i]].answers[j] << endl;
         }
-        cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ð²ÐµÑ‚:";
+        cout << "Ââåäèòå îòâåò íà âîïðîñ:";
         cin >> answer;
         if (answer == q[questions_num[i]].right_answer) p = false;
         else {
@@ -166,8 +166,8 @@ void test(fstream& f, student& st, int t) {
             for (int j = 0; j < 4; j++) {
                 cout << wrong_answers[i].answers[j] << endl;
             }
-            cout << "Ð’Ð°Ñˆ Ð¾Ñ‚Ð²ÐµÑ‚: " << wrong_answers[i].right_answer << endl;
-            cout << "ÐŸÑ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ñ‹Ð¹ Ð¾Ñ‚Ð²ÐµÑ‚: " << q[questions_num[i]].right_answer << endl;
+            cout << "Âàø îòâåò: " << wrong_answers[i].right_answer << endl;
+            cout << "Ïðàâèëüíûé îòâåò: " << q[questions_num[i]].right_answer << endl;
             cout << endl;
         }
     }
@@ -185,11 +185,11 @@ void tema_trening(student st) {
     fstream files("files_hex.txt");
     fstream addresses_and_pointers("addresses_and_pointers_hex.txt");
     fstream dynamic_memory("dynamic_memory_hex.txt");
-    cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ‚ÐµÐ¼Ñƒ: 1 - Ñ†Ð¸ÐºÐ»Ñ‹, 2 - Ð¼Ð°ÑÑÐ¸Ð²Ñ‹ Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ðµ Ð¸ Ð´Ð²ÑƒÐ¼ÐµÑ€Ð½Ñ‹Ðµ, 3 - ÑÑ‚Ñ€Ð¾ÐºÐ¸, 4 - Ñ€ÐµÐºÑƒÑ€ÑÐ¸Ñ, 5 - ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹, 6 - Ñ„Ð°Ð¹Ð»Ñ‹, 7 - Ð°Ð´Ñ€ÐµÑÐ° Ð¸ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»Ð¸, 8 - Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¿Ð°Ð¼ÑÑ‚ÑŒ" << endl;
+    cout << "Âûáåðèòå òåìó: 1 - öèêëû, 2 - ìàññèâû îäíîìåðíûå è äâóìåðíûå, 3 - ñòðîêè, 4 - ðåêóðñèÿ, 5 - ñòðóêòóðû, 6 - ôàéëû, 7 - àäðåñà è óêàçàòåëè, 8 - äèíàìè÷åñêàÿ ïàìÿòü" << endl;
     do {
         cin >> k;
         if (k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8)
-            cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ‚ÐµÐ¼Ñƒ: 1 - Ñ†Ð¸ÐºÐ»Ñ‹, 2 - Ð¼Ð°ÑÑÐ¸Ð²Ñ‹ Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ðµ Ð¸ Ð´Ð²ÑƒÐ¼ÐµÑ€Ð½Ñ‹Ðµ, 3 - ÑÑ‚Ñ€Ð¾ÐºÐ¸, 4 - Ñ€ÐµÐºÑƒÑ€ÑÐ¸Ñ, 5 - ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹, 6 - Ñ„Ð°Ð¹Ð»Ñ‹, 7 - Ð°Ð´Ñ€ÐµÑÐ° Ð¸ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»Ð¸, 8 - Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¿Ð°Ð¼ÑÑ‚ÑŒ" << endl;
+            cout << "Âûáåðèòå òåìó: 1 - öèêëû, 2 - ìàññèâû îäíîìåðíûå è äâóìåðíûå, 3 - ñòðîêè, 4 - ðåêóðñèÿ, 5 - ñòðóêòóðû, 6 - ôàéëû, 7 - àäðåñà è óêàçàòåëè, 8 - äèíàìè÷åñêàÿ ïàìÿòü" << endl;
     } while (k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8);
     switch (k) {
     case 1: {train(cycles, st); break; }
@@ -220,11 +220,11 @@ void tema_test(student st) {
     fstream files("files_hex.txt");
     fstream addresses_and_pointers("addresses_and_pointers_hex.txt");
     fstream dynamic_memory("dynamic_memory_hex.txt");
-    cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ‚ÐµÐ¼Ñƒ: 1 - Ñ†Ð¸ÐºÐ»Ñ‹, 2 - Ð¼Ð°ÑÑÐ¸Ð²Ñ‹ Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ðµ Ð¸ Ð´Ð²ÑƒÐ¼ÐµÑ€Ð½Ñ‹Ðµ, 3 - ÑÑ‚Ñ€Ð¾ÐºÐ¸, 4 - Ñ€ÐµÐºÑƒÑ€ÑÐ¸Ñ, 5 - ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹, 6 - Ñ„Ð°Ð¹Ð»Ñ‹, 7 - Ð°Ð´Ñ€ÐµÑÐ° Ð¸ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»Ð¸, 8 - Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¿Ð°Ð¼ÑÑ‚ÑŒ" << endl;
+    cout << "Âûáåðèòå òåìó: 1 - öèêëû, 2 - ìàññèâû îäíîìåðíûå è äâóìåðíûå, 3 - ñòðîêè, 4 - ðåêóðñèÿ, 5 - ñòðóêòóðû, 6 - ôàéëû, 7 - àäðåñà è óêàçàòåëè, 8 - äèíàìè÷åñêàÿ ïàìÿòü" << endl;
     do {
         cin >> k;
         if (k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8)
-            cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ‚ÐµÐ¼Ñƒ: 1 - Ñ†Ð¸ÐºÐ»Ñ‹, 2 - Ð¼Ð°ÑÑÐ¸Ð²Ñ‹ Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ðµ Ð¸ Ð´Ð²ÑƒÐ¼ÐµÑ€Ð½Ñ‹Ðµ, 3 - ÑÑ‚Ñ€Ð¾ÐºÐ¸, 4 - Ñ€ÐµÐºÑƒÑ€ÑÐ¸Ñ, 5 - ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹, 6 - Ñ„Ð°Ð¹Ð»Ñ‹, 7 - Ð°Ð´Ñ€ÐµÑÐ° Ð¸ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»Ð¸, 8 - Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ð¿Ð°Ð¼ÑÑ‚ÑŒ" << endl;
+            cout << "Âûáåðèòå òåìó: 1 - öèêëû, 2 - ìàññèâû îäíîìåðíûå è äâóìåðíûå, 3 - ñòðîêè, 4 - ðåêóðñèÿ, 5 - ñòðóêòóðû, 6 - ôàéëû, 7 - àäðåñà è óêàçàòåëè, 8 - äèíàìè÷åñêàÿ ïàìÿòü" << endl;
     } while (k != 1 && k != 2 && k != 3 && k != 4 && k != 5 && k != 6 && k != 7 && k != 8);
     switch (k) {
     case 1: {test(cycles, st, k); break; }
@@ -246,11 +246,6 @@ void tema_test(student st) {
     dynamic_memory.close();
 }
 
-void fill_all_structures(){
-    
-    
-}
-
 void finish_test(student st) {
     string que, t;
     quest wrong_answers[40];
@@ -261,20 +256,19 @@ void finish_test(student st) {
     k = 0;
     int mark = 0;
     zv = '*';
-    int n = 0;
     int len[8];
     fstream f;
-    quest** all_questions = new quest*[8];
+    quest** all_questions = new quest* [8];
     for (int c = 0; c < 8; c++) {
         switch (c) {
-        case 0: f.open("cycles_hex.txt");
-        case 1: f.open("arrays_hex.txt");
-        case 2: f.open("lines_hex.txt");
-        case 3: f.open("recursion_hex.txt");
-        case 4: f.open("sructure_hex.txt");
-        case 5: f.open("files_hex.txt");
-        case 6: f.open("addresses_and_pointers_hex.txt");
-        case 7: f.open("dynamic_memory_hex.txt");
+        case 0: f.open("cycles_hex.txt"); break;
+        case 1: f.open("arrays_hex.txt"); break;
+        case 2: f.open("lines_hex.txt"); break;
+        case 3: f.open("recursion_hex.txt"); break;
+        case 4: f.open("sructure_hex.txt"); break;
+        case 5: f.open("files_hex.txt"); break;
+        case 6: f.open("addresses_and_pointers_hex.txt"); break;
+        case 7: f.open("dynamic_memory_hex.txt"); break;
         }
         n = 0;
         quest* q = new quest[1];
@@ -293,7 +287,8 @@ void finish_test(student st) {
             }
         }
         all_questions[c] = q;
-        delete(q);
+        delete[] q;
+        f.close();
     }
     quest question[40];
     int prev = -1, cur;
@@ -313,7 +308,7 @@ void finish_test(student st) {
         } while (!p);
         prev = cur;
     }
-    int count = 0;
+    /*int count = 0;
     int temp = -1;
     int g = 0;
     int wa = 0;
@@ -386,5 +381,5 @@ void finish_test(student st) {
     //        cout << "Âàø îòâåò:"<< answers[i]<<endl;
     //        cout << "Ïðàâèëüíûé îòâåò:"<<right_answers[i] <<endl;
     //    }
-    choice(st);
+    choice(st);*/
 }
