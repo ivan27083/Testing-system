@@ -58,7 +58,17 @@ void append_q(quest*& mas, int n) {
 }
 
 void code_student(student surname, fstream& f) {
-	string login="", password="", marks="";
+	string login="", password="", marks="",name="",surnamee="";
+	for (int i = 0; i < surname.name.length(); i++) {
+		name += inttohex(int(unsigned char(surname.name[i]))) + ".";
+	}
+	f << name;
+	f << "\n";
+	for (int i = 0; i < surname.surname.length(); i++) {
+		surnamee += inttohex(int(unsigned char(surname.surname[i]))) + ".";
+	}
+	f << surnamee;
+	f << "\n";
 	for (int i = 0; i < surname.login.length(); i++) {
 		login += inttohex(int(unsigned char(surname.login[i]))) + ".";
 	}

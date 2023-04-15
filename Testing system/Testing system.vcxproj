@@ -131,7 +131,7 @@
     <ClCompile Include="Main menu.cpp" />
     <ClCompile Include="convertor.cpp" />
     <ClCompile Include="student.cpp" />
-    <ClCompile Include="prepod.cpp" />
+    <ClCompile Include="prepodavatel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
