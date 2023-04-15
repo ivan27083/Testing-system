@@ -77,7 +77,6 @@ void code_student(student surname, fstream& f) {
 	f << "\n";
 	string ex_mark = inttohex(surname.exam_mark + 48) + ".";
 	f << ex_mark;
-	f << "\n";
 }
 
 void code_question(quest quest, fstream& f) {
@@ -93,7 +92,7 @@ void code_question(quest quest, fstream& f) {
 			ans += inttohex(int(unsigned char(quest.answers[i][j]))) + ".";
 		}
 		f << ans;
-		f << "\n";
+		if (i != 3) f << "\n";
 	}
 }
 
