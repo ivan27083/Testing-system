@@ -327,7 +327,7 @@ void finish_test(student &st) {
     else if ((40 - wa) / 40.0 >= 0.5) mark = 3;
     else mark = 2;
     cout << endl;
-    cout << "Количество ошибок: " << wa << endl;
+    cout << "Ваш прогресс: " << 40-wa << "/40" << endl;
     cout << "Ваша оценка: " << mark << endl;
     st.exam_mark = mark;
 }
