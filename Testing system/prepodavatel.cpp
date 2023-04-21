@@ -1350,10 +1350,10 @@ void prepod_login()
 
     logpar[0].login = "s";
     logpar[0].parol = "a";
-    logpar[1].login = "erdhhdy";
-    logpar[1].parol = "e567438";
-    logpar[2].login = "liadha";
-    logpar[2].parol = "l334675";
+    logpar[1].login = "admin";
+    logpar[1].parol = "admin";
+    logpar[2].login = "teacher";
+    logpar[2].parol = "123456";
 
     cout << "\nДобро пожаловать\nВведите логин: "; cin >> login;
     for (int i = 0; i < n; i++) if (logpar[i].login != login) y++;
