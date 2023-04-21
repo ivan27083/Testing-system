@@ -9,6 +9,7 @@ struct student {
 	string password = "";
 	int marks[8];
 	int exam_mark;
+	int progress;
 	double sr_mark;
 };
 struct quest {

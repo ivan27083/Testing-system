@@ -868,7 +868,7 @@ void change_progress(student*& person, int& kolvo_studentov)
         person[n - 1].exam_mark = mark;
         cout << "Новая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].exam_mark << endl;
     }
-    /*if (menu == 10)
+    if (menu == 10)
     {
         cout << "Текущая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].progress << endl;
         while (mark < -1 || mark>40)
@@ -879,7 +879,7 @@ void change_progress(student*& person, int& kolvo_studentov)
         }
         person[n - 1].progress = mark;
         cout << "Новый показатель " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].progress << endl;
-    }*/
+    }
 }
 
 void student_menu() {

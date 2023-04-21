@@ -329,5 +329,6 @@ void finish_test(student &st) {
     cout << endl;
     cout << "Ваш прогресс: " << 40-wa << "/40" << endl;
     cout << "Ваша оценка: " << mark << endl;
+    st.progress = 40 - wa;
     st.exam_mark = mark;
 }
