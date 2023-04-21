@@ -756,7 +756,7 @@ void  sort_itog(student* person, int& kolvo_studentov) {
 
 void del_student(student*& person, int& kolvo_studentov)
 {
-    int menu = -1, n = -1;
+    int  n = -1;
     kolvo_studentov -= 1;
     student* person2 = new student[kolvo_studentov];
     while (n < 1 || n > kolvo_studentov) {
@@ -777,8 +777,6 @@ void del_student(student*& person, int& kolvo_studentov)
     person = new student[kolvo_studentov];
     person = person2;
     cout << "Студент номер " << n + 1 << " удален" << endl;
-    //delete[] person2;
-    //student_menu();
 }
 
 void add_student(student*& person, int& kolvo_studentov)
@@ -828,170 +826,115 @@ void sort_sredn(student* person, int& kolvo_studentov) {
     //student_menu();
 }
 
+void change_progress(student*& person, int& kolvo_studentov)
+{
+    int menu = -1, n = -1, mark = -2;
+    //student* person2 = new student[kolvo_studentov];
+    while (n < 1 || n > kolvo_studentov) {
+        cout << "Введите номер студента: ";
+        cin >> n;
+        if (n<1 || n>kolvo_studentov + 1) cout << "Введено некорректное значение" << endl;
+    }
+    while (menu < 0 || menu>10)
+    {
+        cout << "\nЧто требуется изменить в прогрессе?" << endl;
+        cout << "1)Оценка по теме циклы\n2)Оценка по теме массивы\n3)Оценка по теме строки\n4)Оценка по теме рекурсия\n5)Оценка по теме структуры\n6)Оценка по теме файлы\n7)Оценка по теме адреса и указатели\n8)Оценка по теме динамическая память\n9)Оценка за итоговый тест\n10)Прогресс студента\n0)Выход\n";
+        cout << "Введите номер нужного варианта: ";
+        cin >> menu;
+        if (menu < 0 || menu>10) cout << "\nВведено некорректное значение\n" << endl;
+    }
+    if (menu == 0) { cout << "Выход и меню\n";}
+    if (menu < 8 && menu>0)
+    {
+        cout << "Текущая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].marks[menu] << endl;
+        while (mark < -1 || mark>5)
+        {
+            cout << "Введите новое значение (от -1, если тест нужно считать не пройденным, до 5): ";
+            cin >> mark;
+            if (mark < -1 || mark>5) cout << "\nВведено некорректное значение\n" << endl;
+        }
+        person[n - 1].marks[menu] = mark;
+        cout << "Новая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].marks[menu] << endl;
+    }
+    if (menu == 9)
+    {
+        cout << "Текущая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].exam_mark << endl;
+        while (mark < -1 || mark>5)
+        {
+            cout << "Введите новое значение (от -1, если тест нужно считать не пройденным, до 5): ";
+            cin >> mark;
+            if (mark < -1 || mark>5) cout << "\nВведено некорректное значение\n" << endl;
+        }
+        person[n - 1].exam_mark = mark;
+        cout << "Новая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].exam_mark << endl;
+    }
+    /*if (menu == 10)
+    {
+        cout << "Текущая оценка " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].progress << endl;
+        while (mark < -1 || mark>40)
+        {
+            cout << "Введите новое значение (от -1, если тест нужно считать не пройденным, до 40): ";
+            cin >> mark;
+            if (mark < -1 || mark>40) cout << "\nВведено некорректное значение\n" << endl;
+        }
+        person[n - 1].progress = mark;
+        cout << "Новый показатель " << person[n - 1].name << " " << person[n - 1].surname << ": " << person[n - 1].progress << endl;
+    }*/
+}
+
 void student_menu() {
     system("chcp 1251");
     int kolvo_studentov = 0;//нужно передать из файла
     int menu = -1, menu1 = -1, menu2 = -1;
     student* person = new student[1];//массив со структурой
-   /* {
-        person[0].name = "Олег";
-        person[0].surname = "Волков";
-        person[0].login = "kugtduf";
-        person[0].password = "764487";
-        person[0].marks[0] = 21;
-        person[0].marks[1] = 11;
-        person[0].marks[2] = 31;
-        person[0].marks[3] = 0;
-        person[0].marks[4] = 5;
-        person[0].marks[5] = 61;
-        person[0].marks[6] = 71;
-        person[0].marks[7] = 81;
-        person[0].exam_mark = 47;
-        person[0].sr_mark = 4.1;
-
-        person[1].name = "Сергей";
-        person[1].surname = "Разумовский";
-        person[1].login = "srjnrjry";
-        person[1].password = "36573457";
-        person[1].marks[0] = 12;
-        person[1].marks[1] = 32;
-        person[1].marks[2] = 22;
-        person[1].marks[3] = 0;
-        person[1].marks[4] = 5;
-        person[1].marks[5] = 62;
-        person[1].marks[6] = 72;
-        person[1].marks[7] = 82;
-        person[1].exam_mark = 48;
-        person[1].sr_mark = 4.8;
-
-
-        person[2].name = "Игорь";
-        person[2].surname = "Гром";
-        person[2].login = "rshgfhf";
-        person[2].password = "245767";
-        person[2].marks[0] = 13;
-        person[2].marks[1] = 23;
-        person[2].marks[2] = 33;
-        person[2].marks[3] = 43;
-        person[2].marks[4] = 5;
-        person[2].marks[5] = 73;
-        person[2].marks[6] = 63;
-        person[2].marks[7] = 83;
-        person[2].exam_mark = 49;
-        person[2].sr_mark = 3.2;
-
-        }*/
     fstream students("students.txt");
     while (!students.eof()) {
         append_s(person, kolvo_studentov);
         decode_student(person[kolvo_studentov], students);
         kolvo_studentov++;
     }
-
-        /*cout << "СПИСОК СТУДЕНТОВ" << endl;
-        for (int i = 0; i < kolvo_studentov; i++)
-        {
-            cout << endl << i + 1 << endl;
-            cout << person[i].name << endl;
-            cout << person[i].surname << endl;
-            cout << person[i].marks[0] << endl;
-            cout << person[i].marks[1] << endl;
-            cout << person[i].marks[2] << endl;
-            cout << person[i].marks[3] << endl;
-            cout << person[i].marks[4] << endl;
-            cout << person[i].marks[5] << endl;
-            cout << person[i].marks[6] << endl;
-            cout << person[i].marks[7] << endl;
-            cout << person[i].exam_mark << endl;
-            cout << person[i].exam_mark << endl;
-            cout << "sr znach=" << person[i].sr_mark << endl;
-            cout << endl << endl;
-        }*/
-    
-    while (menu != 0) 
+    while (menu != 0)
     {
         cout << "\n\tРабота со списком студентов";
-        cout << "\n1)Удаление студентов\n2)Регистрация студентов\n3)Вывод с сортировкой \n4)Вывод списка студентов с оценками по категориям\n0)Выход\n";
+        cout << "\n1)Удаление студентов\n2)Регистрация студентов\n3)Вывод с сортировкой \n4)Вывод списка студентов с оценками по категориям\n5)Изменение прогресса студента\n0)Выход\n";
 
         menu = -1;
         do {
             cout << "\nВведите нужный вариант: ";
             cin >> menu;
-            if (menu < 0 || menu > 4) cout << "введено неверное значение. попробуйте снова." << endl;
-        } while (menu < 0 || menu > 4);
+            if (menu < 0 || menu > 5) cout << "Введено неверное значение. Попробуйте снова." << endl;
+        } while (menu < 0 || menu > 5);
 
         switch (menu)
         {
-        case 0: cout << "\nВыход"; break;
+        case 0: cout << "\nВыход\n"; break;
         case 1: { del_student(person, kolvo_studentov);
-
-            /*
-            for (int i = 0; i < kolvo_studentov; i++)
-            {
-                cout << endl << i + 1 << endl;
-                cout << person[i].name << endl;
-                cout << person[i].surname << endl;
-                cout << person[i].marks[0] << endl;
-                cout << person[i].marks[1] << endl;
-                cout << person[i].marks[2] << endl;
-                cout << person[i].marks[3] << endl;
-                cout << person[i].marks[4] << endl;
-                cout << person[i].marks[5] << endl;
-                cout << person[i].marks[6] << endl;
-                cout << person[i].marks[7] << endl;
-                cout << person[i].exam_mark << endl;
-                cout << person[i].exam_mark << endl;
-                cout << "sr znach=" << person[i].sr_mark << endl;
-                cout << endl << endl;
-            }*/
-
             break;}
         case 2: {add_student(person, kolvo_studentov);
-            ///////////////////////////////////////////
-            for (int i = 0; i < kolvo_studentov; i++)
-            {
-                cout << endl << i + 1 << endl;
-                cout << person[i].name << endl;
-                cout << person[i].surname << endl;
-                cout << person[i].marks[0] << endl;
-                cout << person[i].marks[1] << endl;
-                cout << person[i].marks[2] << endl;
-                cout << person[i].marks[3] << endl;
-                cout << person[i].marks[4] << endl;
-                cout << person[i].marks[5] << endl;
-                cout << person[i].marks[6] << endl;
-                cout << person[i].marks[7] << endl;
-                cout << person[i].exam_mark << endl;
-                cout << person[i].exam_mark << endl;
-                cout << "sr znach=" << person[i].sr_mark << endl;
-                cout << endl << endl;
-            }
-
-
             break;}
         case 3: {cout << "\n\tВывод рейтинга студентов";
-        cout << "\n1)по всем темам\n2)по конктретной теме \n3)только итоговый тест\n4) только средний балл\n0)Выход\n";
-        do {
-            cout << "\nВведите нужный вариант: ";
-            cin >> menu2;
-            if (menu < 0 || menu > 4) cout << "введено неверное значение. попробуйте снова." << endl;
-        } while (menu2 < 0 || menu2>4);
+            cout << "\n1)по всем темам\n2)по конктретной теме \n3)только итоговый тест\n4)только средний балл\n0)Выход\n";
+            do {
+                cout << "\nВведите нужный вариант: ";
+                cin >> menu2;
+                if (menu < 0 || menu > 4) cout << "Введено неверное значение. Попробуйте снова." << endl;
+            } while (menu2 < 0 || menu2>4);
 
-        switch (menu2)
-        {
-        case 0: cout << "\nВыход"; break;
-        case 1: sort_vse(person, kolvo_studentov); break;
-        case 2: sort_tema(person, kolvo_studentov); break;
-        case 3: sort_itog(person, kolvo_studentov); break;
-        case 4: sort_sredn(person, kolvo_studentov); break;
-        }}
+            switch (menu2)
+            {
+            case 0: cout << "\nВыход"; break;
+            case 1: sort_vse(person, kolvo_studentov); break;
+            case 2: sort_tema(person, kolvo_studentov); break;
+            case 3: sort_itog(person, kolvo_studentov); break;
+            case 4: sort_sredn(person, kolvo_studentov); break;
+            }}
         case 4: {
             cout << "\n\tВывод оценок студентов";
             cout << "\n1)по всем темам\n2)по конктретной теме \n3)только итоговый тест \n4) только средний балл\n0)Выход\n";
             do {
                 cout << "\nВведите нужный вариант";
                 cin >> menu1;
-                if (menu < 0 || menu > 4) cout << "введено неверное значение. попробуйте снова." << endl;
+                if (menu < 0 || menu > 4) cout << "Введено неверное значение. Попробуйте снова." << endl;
             } while (menu1 < 0 || menu1>4);
 
             switch (menu1)
@@ -1002,7 +945,9 @@ void student_menu() {
             case 3: otsenki_itog(person, kolvo_studentov); break;
             case 4: otsenki_sredn(person, kolvo_studentov);  break;
             }
-        }
+            break;}
+        case 5: change_progress(person, kolvo_studentov); break;
+
         }
 
         students.close();
@@ -1016,9 +961,7 @@ void student_menu() {
             }
             studentt.close();
         }
-
-}
-
+    }
 }
 
 void delete_question(quest*& vopros, int& kolvo_voprosov)
@@ -1355,17 +1298,18 @@ void prepod_login()
     logpar[2].login = "teacher";
     logpar[2].parol = "123456";
 
+
     cout << "\nДобро пожаловать\nВведите логин: "; cin >> login;
     for (int i = 0; i < n; i++) if (logpar[i].login != login) y++;
-    if (y == n) cout << "\n логин не найден " << endl;
+    if (y == n) cout << "\nЛогин не найден!" << endl;
     else {
-        cout << "\nВведите пароль: "; cin >> parol;
+        cout << "Введите пароль: "; cin >> parol;
         for (int i = 0; i < n; i++) {
             if (logpar[i].login == login && logpar[i].parol == parol)
             {
                 choice();
             }
-            else if (logpar[i].login == login && logpar[i].parol != parol) { cout << "\n пароль не верный" << endl; }
+            else if (logpar[i].login == login && logpar[i].parol != parol) { cout << "\nПароль не верный!" << endl; }
         }
 
     }
